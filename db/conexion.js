@@ -12,7 +12,7 @@ const conexion = mysql.createConnection({
 //establecemos conexion
 conexion.connect((fallo) =>{
     if(fallo){
-        console.error('Error al conectar a la bd', fallo.message);
+        console.error('error al conectar a la bd', fallo.message);
         return;
     }
     console.log('conexion exitosa');
