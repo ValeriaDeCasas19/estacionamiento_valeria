@@ -3,6 +3,7 @@ const conexion = require('../db/conexion');
 exports.registrarEntrada = (req, res) => {
   const { placas, tipo } = req.body;
 
+
 //validacion
   if (!placas || !tipo) {
     return res.status(400).json({ error: 'Ingresa las placas y el tipo' });
@@ -55,3 +56,53 @@ exports.registrarEntrada = (req, res) => {
     }
   });
 };
+
+
+exports.registrarSalida = (req,res) => {
+    const {placas} = req.body;
+
+    if(!placas){
+        return res.status(400).json({error: 'Ingresa las placas'});
+
+    }
+    const fecha_salida = new Date();
+
+    const consulta = ` SELECT te.id, te.fecha_entrada, v.tipo
+                       FROM tiempo_estacionado te
+                       JOIN vehiculos v ON te.placas = v.placas
+                       WHERE te.placas = ? AND te.fecha_salida IS NULL
+                       ORDER BY te.fecha_entrada DESC LIMIT 1`;
+
+    conexion.query(consulta, [placas], (fallo, resultados) =>{
+        if (fallo) return res.status(500).json({error:'Error al buscar'});
+
+        if (resultados.length === 0){
+            return res.status(404).json({error: 'No hay registros de salida'});
+        }
+        const {id, fecha_entrada, tipo} = resultados[0];
+        const entrada = new Date(fecha_entrada);
+        const minutos = Math.ceil((fecha_salida-entrada) / 60000);
+
+        let pago = 0;
+        if (tipo === 'Residente') pago = minutos * 1;
+        else if (tipo === 'No Residente') pago = minutos *3;
+
+
+        conexion.query(
+         `UPDATE tiempo_estacionado SET fecha_salida = ?, minutos = ?, pago = ? WHERE id = ?`,
+         [fecha_salida, minutos, pago, id],
+         (fallo) => {
+            if (fallo) return res.status(500).json({error: 'Error al registrar salida'})
+
+            return res.status(200).json({
+                mensaje: 'Salida registrada',
+                placas,
+                tipo,
+                minutos,
+                pago,
+                fecha_salida
+            });
+         }
+        );
+    });
+}
