@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/api/vehiculos', vehiculoRouter);
 
+
+app.use(express.static('public'));
 //puerto
 
 app.listen(PORT, () =>{

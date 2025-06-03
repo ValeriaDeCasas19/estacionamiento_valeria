@@ -65,8 +65,10 @@ exports.registrarSalida = (req,res) => {
         return res.status(400).json({error: 'Ingresa las placas'});
 
     }
+    //obtiene la hora de salida actual
     const fecha_salida = new Date();
 
+    //consulta sql 
     const consulta = ` SELECT te.id, te.fecha_entrada, v.tipo
                        FROM tiempo_estacionado te
                        JOIN vehiculos v ON te.placas = v.placas
@@ -85,7 +87,8 @@ exports.registrarSalida = (req,res) => {
 
         let pago = 0;
         if (tipo === 'Residente') pago = minutos * 1;
-        else if (tipo === 'No Residente') pago = minutos *3;
+        else if (tipo === 'No residente') pago = minutos *3;
+        else if (ripo === 'Oficial')
 
 
         conexion.query(
