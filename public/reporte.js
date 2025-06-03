@@ -42,3 +42,32 @@ document.getElementById('formReporte').addEventListener('submit', async (e) => {
     cuerpo.innerHTML += fila;
   });
 });
+
+//boton para descargar pdf
+document.getElementById('btnPDF').addEventListener('click', () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  //tabla
+  doc.text('Reporte de Estacionamiento', 14, 15);
+  doc.autoTable({
+    startY: 20,
+    html: '#tablaResultados',
+    styles: { fontSize: 10 }
+  });
+
+  doc.save('reporte_estacionamiento.pdf');
+});
+
+//boton para descargar excel
+document.getElementById('btnExcel').addEventListener('click', () => {
+  
+  const tabla = document.getElementById('tablaResultados');
+
+  // Convertir tabla a hoja de cálculo
+  const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Reporte' });
+
+  // Exportar como archivo Excel
+  XLSX.writeFile(wb, 'reporte_estacionamiento.xlsx');
+});
+
