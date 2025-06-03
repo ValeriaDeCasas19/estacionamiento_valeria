@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte de Estacionamiento</title>
+</head>
+<body>
+  <h1>Generar Reporte</h1>
+  <form id="formReporte">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required>
+
+    <label for="horaInicio">Desde:</label>
+    <input type="time" id="horaInicio" name="horaInicio" required>
+
+    <label for="horaFin">Hasta:</label>
+    <input type="time" id="horaFin" name="horaFin" required>
+
+    <button type="submit">Buscar</button>
+  </form>
+
+  <h3>Resultados</h3>
+
+  <div id="resultado"></div>
+  <table id="tablaResultados">
+    <thead>
+      <tr>
+        <th>Núm. Placa</th>
+        <th>Tiempo Estacionado</th>
+        <th>Tipo</th>
+        <th>Cantidad a Pagar</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button id="btnExcel">Descargar Excel</button>
+  <button id="btnPDF">Descargar PDF</button>
+
+  <script src="./reporte.js"></script>
+</body>
+</html>

@@ -121,3 +121,4 @@ exports.registrarSalida = (req, res) => {
     );
   });
 };
+
