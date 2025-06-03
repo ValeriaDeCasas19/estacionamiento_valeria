@@ -65,7 +65,7 @@ if (formSalida) {
         </table>
       `;
     } else {
-      document.getElementById('resultado').innerHTML = `<p style="color:red;">❌ ${data.error || 'Error al registrar'}</p>`;
+      document.getElementById('resultado').innerHTML = `<p style="color:red;"> X ${data.error || 'Error al registrar'}</p>`;
     }
   });
 }
