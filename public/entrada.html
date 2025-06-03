@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro entrada</title>
+    <link rel="stylesheet" href="./entrada.css">
+</head>
 </head>
 <body>
+    <div class="card">
     <h1>Registrar Entrada</h1>
     <form id="formEntrada">
-        <label for="placas">Placas:</label>
-        <input type="text" id="placas" name="placas" required><br><br>
+      <label for="placas">Placas</label>
+      <input type="text" id="placas" name="placas" required />
 
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo">
-            <option value="Residente">Residente</option>
-            <option value="No residente">No residente</option>
-            <option value="Vehiculo oficial"> Vehiculo oficial</option>
-        </select><br><br>
+      <label for="tipo">Tipo de vehículo</label>
+      <select id="tipo" name="tipo" required>
+        <option value="Residente">Residente</option>
+        <option value="No residente">No residente</option>
+        <option value="Vehiculo oficial">Vehículo oficial</option>
+      </select>
 
-        <button type="submit">Registrar</button>
+      <button type="submit">Registrar</button>
     </form>
-
     <div id="resultado"></div>
-    <script src="./scripts.js"></script>
-    
+  </div>
 
+  <script src="./scripts.js"></script>
 </body>
 </html>
